@@ -62,17 +62,28 @@ func main() {
 
 	//Actual output
 	baselineRecipes := recipes.Recipe{Name: *item, Ingredients: craftData.GetIngredients(*item)}
-	result, err := prettyStruct(baselineRecipes)
+
+	result, err := jsonMarshall(baselineRecipes, *pretty)
 	if err != nil {
 		log.Error().Stack().Err(err).Msg("Error getting ingredients")
 	}
 	fmt.Println(result)
 }
 
-func prettyStruct(data interface{}) (string, error) {
-	val, err := json.MarshalIndent(data, "", "    ")
-	if err != nil {
-		return "", err
+func jsonMarshall(data interface{}, pretty bool) (string, error) {
+	var value []byte
+	if pretty {
+		val, err := json.MarshalIndent(data, "", "    ")
+		if err != nil {
+			return "", err
+		}
+		value = val
+	} else {
+		val, err := json.Marshal(data)
+		if err != nil {
+			return "", err
+		}
+		value = val
 	}
-	return string(val), nil
+	return string(value), nil
 }

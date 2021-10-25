@@ -5,6 +5,8 @@ import (
 	"github.com/rs/zerolog/log"
 	"io/ioutil"
 	"os"
+	"strings"
+	"unicode"
 )
 
 type Recipe struct {
@@ -52,7 +54,7 @@ func (c *CraftData) GetIngredients(item string) map[string]int {
 
 func (c *CraftData) FindRecipes(item string) int {
 	for i := range c.Recipes {
-		if item == c.Recipes[i].Name {
+		if normalizeItemName(item) == normalizeItemName(c.Recipes[i].Name) {
 			log.Debug().Str("item", item).Int("index", i).Msg("Recipe found")
 			return i
 		}
@@ -73,4 +75,19 @@ func combineMaps(a map[string]int, b map[string]int) map[string]int {
 		a[k] = v
 	}
 	return a
+}
+
+func normalizeItemName(item string) string {
+	return strings.ToLower(spaceStringsBuilder(item))
+}
+
+func spaceStringsBuilder(str string) string {
+	var b strings.Builder
+	b.Grow(len(str))
+	for _, ch := range str {
+		if !unicode.IsSpace(ch) {
+			b.WriteRune(ch)
+		}
+	}
+	return b.String()
 }

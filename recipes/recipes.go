@@ -72,6 +72,11 @@ func multiplyIngredients(count int, ingredients map[string]int) map[string]int {
 
 func combineMaps(a map[string]int, b map[string]int) map[string]int {
 	for k, v := range b {
+		if _, ok := a[k]; ok {
+			a[k] += v
+		} else {
+			a[k] = v
+		}
 		a[k] = v
 	}
 	return a

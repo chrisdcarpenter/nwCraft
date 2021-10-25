@@ -1,0 +1,31 @@
+{
+  "game_name": "NewWorld",
+  "recipes": [
+    {
+      "name": "Linen Leggings",
+      "ingredients": {
+        "Linen": 10,
+        "Coarse Leather": 6,
+        "Iron Ingot": 2
+      }
+    },
+    {
+      "name": "Linen",
+      "ingredients": {
+        "Fibers": 4
+      }
+    },
+    {
+      "name": "Coarse Leather",
+      "ingredients": {
+        "Rawhide": 4
+      }
+    },
+    {
+      "name": "Iron Ingot",
+      "ingredients": {
+        "Iron Ore": 4
+      }
+    }
+  ]
+}

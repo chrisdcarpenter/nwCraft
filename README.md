@@ -2,6 +2,19 @@
 
 nwCraft is a tool to help with crafting in mmo's. 
 
+Example using data in sampleData.json
+```
+~\go\src\github.com\chris-carpenter\nwCraft [update-readme ≡]> nwCraft.exe --item "Linen Leggings" --pretty
+{
+    "name": "Linen Leggings",
+    "ingredients": {
+        "Fibers": 40,
+        "Iron Ore": 8,
+        "Rawhide": 24
+    }
+}
+```
+
 Build with
 ```
 go install
